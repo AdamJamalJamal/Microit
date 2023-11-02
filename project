@@ -1,0 +1,33 @@
+from microbit import *
+from ssd1306 import *
+from ssd1306_text import *
+def light():
+    g=display.read_light_level()
+    if g > 125:
+        pin1.write_digital(1)
+    else:
+        pin1.write_digital(0)
+def turn_on():
+    pin16.write_digital(1)
+def turn_off():
+    pin16.write_digital(0)
+while True:
+    a=pin2.read_digital()
+    j=int(temperature())
+    h=str(j)
+    y=str(display.read_light_level())
+    if a== 1:
+        light()
+    display.scroll(j)
+    if j < 28:
+       turn_on()
+    else:
+        turn_off()
+    initialize()
+    clear_oled()
+    sleep(1000)
+    add_text(0,0,"temperature")
+    add_text(1,1,h)
+    add_text(2,2,"light lel =")
+    add_text(3,3,y)
+    
